@@ -24,15 +24,11 @@ pipeline {
                 sh "mvn clean package"
             }
         }
-
+        
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonarq') {  
-                    sh '''
-                        mvn clean verify sonar:sonar \
-                        -Dsonar.projectKey=sample \
-                        -Dsonar.projectName="sample"
-                    '''
+                withSonarQubeEnv('sonarq') {
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=springboot -Dsonar.projectName='springboot'"
                 }
             }
         }
